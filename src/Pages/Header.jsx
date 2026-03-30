@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Menu, Dumbbell, ArrowRight, Phone, Flame } from "lucide-react";
+import { Menu, Dumbbell, ArrowRight, Phone, Flame, X } from "lucide-react";
 import { FaInstagram, FaFacebookF, FaYoutube } from "react-icons/fa";
 
 import { Button } from "@/components/ui/button";
@@ -70,7 +70,10 @@ export default function Header() {
             Call Now
           </a>
 
-          <Button className="rounded-full bg-gradient-to-r from-orange-500 to-red-600 px-5 font-semibold text-white hover:from-orange-600 hover:to-red-700">
+          <Button
+            asChild
+            className="rounded-full bg-gradient-to-r from-orange-500 to-red-600 px-5 font-semibold text-white hover:from-orange-600 hover:to-red-700"
+          >
             <Link to="/membership" className="inline-flex items-center gap-2">
               Join Now
               <ArrowRight className="h-4 w-4" />
@@ -92,16 +95,24 @@ export default function Header() {
           <SheetContent side="right" className="border-white/10 bg-zinc-950 text-white">
             <div className="flex h-full flex-col justify-between">
               <div>
-                <div className="mb-8 flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-red-600">
-                    <Dumbbell className="h-6 w-6 text-white" />
+                <div className="mb-8 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-red-600">
+                      <Dumbbell className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-lg font-black tracking-[0.2em]">XFIT</p>
+                      <p className="text-xs uppercase tracking-[0.3em] text-zinc-400">
+                        Gym & Fitness
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-lg font-black tracking-[0.2em]">XFIT</p>
-                    <p className="text-xs uppercase tracking-[0.3em] text-zinc-400">
-                      Gym & Fitness
-                    </p>
-                  </div>
+
+                  <SheetClose asChild>
+                    <button className="rounded-full border border-white/10 p-2 text-zinc-300 hover:bg-white/5 hover:text-white">
+                      <X className="h-5 w-5" />
+                    </button>
+                  </SheetClose>
                 </div>
 
                 <div className="flex flex-col gap-2">
@@ -109,8 +120,8 @@ export default function Header() {
                     <SheetClose asChild key={item.href}>
                       <Link
                         to={item.href}
-                        className="rounded-xl border border-white/10 px-4 py-3 text-sm font-medium text-zinc-200 transition hover:border-orange-500/40 hover:bg-white/5 hover:text-white"
                         onClick={() => setOpen(false)}
+                        className="rounded-xl border border-white/10 px-4 py-3 text-sm font-medium text-zinc-200 transition hover:border-orange-500/40 hover:bg-white/5 hover:text-white"
                       >
                         {item.label}
                       </Link>
@@ -147,11 +158,15 @@ export default function Header() {
               </div>
 
               <div className="space-y-3 border-t border-white/10 pt-6">
-                <Button className="w-full rounded-full bg-gradient-to-r from-orange-500 to-red-600 font-semibold text-white hover:from-orange-600 hover:to-red-700">
+                <Button
+                  asChild
+                  className="w-full rounded-full bg-gradient-to-r from-orange-500 to-red-600 font-semibold text-white hover:from-orange-600 hover:to-red-700"
+                >
                   <Link to="/membership">Join Now</Link>
                 </Button>
 
                 <Button
+                  asChild
                   variant="outline"
                   className="w-full rounded-full border-white/10 bg-transparent text-white hover:bg-white/5"
                 >
