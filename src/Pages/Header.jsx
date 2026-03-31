@@ -27,6 +27,8 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-zinc-950/90 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        
+        {/* LOGO */}
         <Link to="/" className="flex items-center gap-3">
           <motion.div
             whileHover={{ scale: 1.06, rotate: -2 }}
@@ -49,6 +51,7 @@ export default function Header() {
           </div>
         </Link>
 
+        {/* DESKTOP NAV */}
         <nav className="hidden items-center gap-8 lg:flex">
           {navLinks.map((item) => (
             <Link
@@ -61,6 +64,7 @@ export default function Header() {
           ))}
         </nav>
 
+        {/* DESKTOP CTA */}
         <div className="hidden items-center gap-3 lg:flex">
           <a
             href="tel:+919999999999"
@@ -81,6 +85,7 @@ export default function Header() {
           </Button>
         </div>
 
+        {/* MOBILE MENU */}
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild className="lg:hidden">
             <Button
@@ -92,16 +97,27 @@ export default function Header() {
             </Button>
           </SheetTrigger>
 
-          <SheetContent side="right" className="border-white/10 bg-zinc-950 text-white">
-            <div className="flex h-full flex-col justify-between">
-              <div>
-                <div className="mb-8 flex items-center justify-between">
+          <SheetContent
+            side="right"
+            className="border-white/10 bg-zinc-950 text-white p-0"
+          >
+            <motion.div
+              initial={{ x: 100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="flex h-full flex-col"
+            >
+              {/* TOP */}
+              <div className="p-6">
+                <div className="mb-10 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-red-600">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-red-600 shadow-lg">
                       <Dumbbell className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <p className="text-lg font-black tracking-[0.2em]">XFIT</p>
+                      <p className="text-lg font-black tracking-[0.2em]">
+                        XFIT
+                      </p>
                       <p className="text-xs uppercase tracking-[0.3em] text-zinc-400">
                         Gym & Fitness
                       </p>
@@ -109,55 +125,67 @@ export default function Header() {
                   </div>
 
                   <SheetClose asChild>
-                    <button className="rounded-full border border-white/10 p-2 text-zinc-300 hover:bg-white/5 hover:text-white">
+                    <button className="rounded-full border border-white/10 p-2 text-zinc-300 hover:bg-white/5 hover:text-white transition">
                       <X className="h-5 w-5" />
                     </button>
                   </SheetClose>
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  {navLinks.map((item) => (
+                {/* NAV LINKS */}
+                <div className="flex flex-col gap-3">
+                  {navLinks.map((item, i) => (
                     <SheetClose asChild key={item.href}>
-                      <Link
-                        to={item.href}
-                        onClick={() => setOpen(false)}
-                        className="rounded-xl border border-white/10 px-4 py-3 text-sm font-medium text-zinc-200 transition hover:border-orange-500/40 hover:bg-white/5 hover:text-white"
+                      <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.05 }}
                       >
-                        {item.label}
-                      </Link>
+                        <Link
+                          to={item.href}
+                          onClick={() => setOpen(false)}
+                          className="group flex items-center justify-between rounded-xl border border-white/10 px-5 py-4 text-base font-medium text-zinc-200 transition hover:border-orange-500/40 hover:bg-white/5 hover:text-white"
+                        >
+                          {item.label}
+                          <ArrowRight className="h-4 w-4 opacity-0 transition group-hover:opacity-100 group-hover:translate-x-1" />
+                        </Link>
+                      </motion.div>
                     </SheetClose>
                   ))}
                 </div>
 
-                <div className="mt-8 flex items-center gap-3">
+                {/* SOCIAL */}
+                <div className="mt-10 flex justify-center gap-4">
                   <a
                     href="https://instagram.com"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-zinc-300 transition hover:border-pink-500 hover:text-pink-500"
+                    className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 text-zinc-300 transition hover:border-pink-500 hover:text-pink-500"
                   >
                     <FaInstagram />
                   </a>
+
                   <a
                     href="https://facebook.com"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-zinc-300 transition hover:border-blue-500 hover:text-blue-500"
+                    className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 text-zinc-300 transition hover:border-blue-500 hover:text-blue-500"
                   >
                     <FaFacebookF />
                   </a>
+
                   <a
                     href="https://youtube.com"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-zinc-300 transition hover:border-red-500 hover:text-red-500"
+                    className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 text-zinc-300 transition hover:border-red-500 hover:text-red-500"
                   >
                     <FaYoutube />
                   </a>
                 </div>
               </div>
 
-              <div className="space-y-3 border-t border-white/10 pt-6">
+              {/* BOTTOM CTA */}
+              <div className="mt-auto border-t border-white/10 p-6 space-y-3">
                 <Button
                   asChild
                   className="w-full rounded-full bg-gradient-to-r from-orange-500 to-red-600 font-semibold text-white hover:from-orange-600 hover:to-red-700"
@@ -170,10 +198,12 @@ export default function Header() {
                   variant="outline"
                   className="w-full rounded-full border-white/10 bg-transparent text-white hover:bg-white/5"
                 >
-                  <a href="tel:+919999999999">Call +91 99999 99999</a>
+                  <a href="tel:+919999999999">
+                    Call +91 99999 99999
+                  </a>
                 </Button>
               </div>
-            </div>
+            </motion.div>
           </SheetContent>
         </Sheet>
       </div>
