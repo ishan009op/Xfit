@@ -19,6 +19,7 @@ const contactItems = [
     icon: Phone,
     title: "Phone",
     value: "+91 99999 99999",
+    link: "tel:+919999999999",
   },
   {
     icon: Mail,
@@ -33,162 +34,126 @@ const contactItems = [
 ];
 
 const socials = [
-  { icon: FaInstagram, href: "https://instagram.com", label: "Instagram" },
-  { icon: FaFacebookF, href: "https://facebook.com", label: "Facebook" },
-  { icon: FaYoutube, href: "https://youtube.com", label: "YouTube" },
-  { icon: FaXTwitter, href: "https://x.com", label: "X" },
+  { icon: FaInstagram, href: "https://instagram.com" },
+  { icon: FaFacebookF, href: "https://facebook.com" },
+  { icon: FaYoutube, href: "https://youtube.com" },
+  { icon: FaXTwitter, href: "https://x.com" },
 ];
-
-const container = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.12 } },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0 },
-};
 
 export default function Contact() {
   return (
-    <section className="relative overflow-hidden bg-zinc-950 px-4 py-20 text-white sm:px-6 lg:px-8">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(249,115,22,0.18),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(239,68,68,0.12),_transparent_28%)]" />
+    <section className="bg-zinc-950 px-4 py-20 text-white">
+      <div className="mx-auto max-w-7xl grid gap-10 lg:grid-cols-2">
 
-      <div className="relative mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 max-w-2xl"
-        >
-          <p className="mb-3 text-sm uppercase tracking-[0.4em] text-orange-400">
-            Contact
-          </p>
-          <h2 className="text-4xl font-black uppercase leading-tight sm:text-5xl">
-            Let’s start your
-            <span className="block bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
-              fitness journey
-            </span>
+        {/* LEFT */}
+        <div className="space-y-4">
+          <h2 className="text-4xl font-black uppercase">
+            Contact Us
           </h2>
-          <p className="mt-4 text-zinc-300">
-            Ask about membership, training plans, class schedules, or anything else.
-            We’ll get back to you as soon as possible.
-          </p>
-        </motion.div>
 
-        <div className="grid gap-10 lg:grid-cols-2">
-          <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            className="space-y-4"
-          >
-            {contactItems.map((itemData) => {
-              const Icon = itemData.icon;
+          <p className="text-zinc-300">
+            Get instant support and join your fitness journey today.
+          </p>
+
+          <p className="text-sm text-green-400">
+            ⚡ Get reply within 5 minutes on WhatsApp
+          </p>
+
+          {contactItems.map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={i}
+                className="rounded-2xl border border-white/10 bg-white/5 p-5 flex items-center gap-4"
+              >
+                <Icon className="text-orange-400" />
+                <div>
+                  <p className="font-semibold">{item.title}</p>
+                  {item.link ? (
+                    <a href={item.link} className="text-zinc-400 hover:text-white">
+                      {item.value}
+                    </a>
+                  ) : (
+                    <p className="text-zinc-400">{item.value}</p>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+
+          {/* SOCIALS */}
+          <div className="flex gap-3 mt-4">
+            {socials.map((s, i) => {
+              const Icon = s.icon;
               return (
-                <motion.div
-                  key={itemData.title}
-                  variants={item}
-                  className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur"
+                <a
+                  key={i}
+                  href={s.href}
+                  target="_blank"
+                  className="p-3 rounded-full bg-white/5 hover:bg-orange-500/20"
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500/10 text-orange-400">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="text-lg font-bold">{itemData.title}</p>
-                      <p className="text-sm text-zinc-400">{itemData.value}</p>
-                    </div>
-                  </div>
-                </motion.div>
+                  <Icon />
+                </a>
               );
             })}
+          </div>
+        </div>
 
-            <motion.div
-              variants={item}
-              className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-orange-500/10 to-red-500/10 p-6 backdrop-blur"
-            >
-              <p className="text-sm uppercase tracking-[0.3em] text-orange-300">
-                Follow Us
-              </p>
-              <div className="mt-4 flex flex-wrap gap-3">
-                {socials.map((social) => {
-                  const Icon = social.icon;
-                  return (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={social.label}
-                      className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-zinc-300 transition hover:border-orange-500 hover:bg-orange-500/10 hover:text-white"
-                    >
-                      <Icon className="h-5 w-5" />
-                    </a>
-                  );
-                })}
-              </div>
-            </motion.div>
-          </motion.div>
+        {/* RIGHT */}
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur md:p-8"
+          <h3 className="text-2xl font-bold mb-4">
+            Quick Contact
+          </h3>
+
+          {/* WhatsApp CTA (MAIN) */}
+          <a
+            href="https://wa.me/91XXXXXXXXXX?text=Hi%20I%20want%20to%20join%20the%20gym"
+            target="_blank"
+            className="w-full block text-center bg-green-500 py-3 rounded-full font-semibold hover:bg-green-600"
           >
-            <div className="mb-6">
-              <p className="text-sm uppercase tracking-[0.35em] text-orange-400">
-                Send Message
-              </p>
-              <h3 className="mt-2 text-3xl font-bold">Get in touch with us</h3>
-            </div>
+            Chat on WhatsApp
+          </a>
 
-            <form className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="w-full rounded-2xl border border-white/10 bg-zinc-950 px-4 py-3 text-white outline-none placeholder:text-zinc-500 focus:border-orange-500"
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  className="w-full rounded-2xl border border-white/10 bg-zinc-950 px-4 py-3 text-white outline-none placeholder:text-zinc-500 focus:border-orange-500"
-                />
-              </div>
+          {/* Divider */}
+          <div className="my-6 text-center text-zinc-400 text-sm">
+            OR send a message
+          </div>
 
-              <input
-                type="text"
-                placeholder="Subject"
-                className="w-full rounded-2xl border border-white/10 bg-zinc-950 px-4 py-3 text-white outline-none placeholder:text-zinc-500 focus:border-orange-500"
-              />
+          {/* FORM */}
+          <form className="space-y-4">
+            <input
+              type="text"
+              placeholder="Your Name"
+              className="w-full rounded-xl bg-zinc-900 px-4 py-3"
+            />
 
-              <textarea
-                rows="6"
-                placeholder="Write your message..."
-                className="w-full rounded-2xl border border-white/10 bg-zinc-950 px-4 py-3 text-white outline-none placeholder:text-zinc-500 focus:border-orange-500"
-              />
+            <input
+              type="email"
+              placeholder="Your Email"
+              className="w-full rounded-xl bg-zinc-900 px-4 py-3"
+            />
 
-              <button
-                type="submit"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-red-600 px-5 py-3 font-semibold text-white transition hover:from-orange-600 hover:to-red-700"
-              >
-                Send Message
-                <Send className="h-4 w-4" />
-              </button>
-            </form>
+            <textarea
+              rows="4"
+              placeholder="Message"
+              className="w-full rounded-xl bg-zinc-900 px-4 py-3"
+            />
 
-            <div className="mt-6 flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-zinc-400">
-              <span>Need a quick response?</span>
-              <a href="tel:+919999999999" className="inline-flex items-center gap-2 text-orange-400">
-                Call now <ArrowRight className="h-4 w-4" />
-              </a>
-            </div>
-          </motion.div>
+            <button className="w-full bg-orange-500 py-3 rounded-full font-semibold hover:bg-orange-600 flex items-center justify-center gap-2">
+              Send Message <Send size={16} />
+            </button>
+          </form>
+
+          {/* CALL CTA */}
+          <div className="mt-6 text-center">
+            <a
+              href="tel:+919999999999"
+              className="text-orange-400 flex justify-center items-center gap-2"
+            >
+              Call Now <ArrowRight size={16} />
+            </a>
+          </div>
         </div>
       </div>
     </section>

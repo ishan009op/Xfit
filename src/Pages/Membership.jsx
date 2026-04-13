@@ -121,7 +121,7 @@ export default function Membership() {
                 
                 {/* WhatsApp CTA */}
                 <a
-                  href={`https://wa.me/919780725923?text=Hi%20I%20am%20interested%20in%20the%20${plan.name}%20plan`}
+                  href={`https://wa.me/91XXXXXXXXXX?text=Hi%20I%20am%20interested%20in%20the%20${plan.name}%20plan`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full rounded-full bg-green-500 py-3 text-center font-semibold text-white transition hover:bg-green-600"
